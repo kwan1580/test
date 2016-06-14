@@ -1,0 +1,49 @@
+{
+  "kind": "ReplicationController",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "frontend-v5",
+    "labels": {
+      "state": "serving",
+      "version": "5"
+    }
+  },
+  "spec": {
+    "replicas": 2,
+    "selector": {
+      "app": "frontend",
+      "version": "5"    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "frontend",
+          "version": "5"
+        }
+      },
+      "spec": {
+        "volumes": null,
+        "containers": [
+          {
+            "name": "myapp",
+            "image": "kwan1580/main2",
+            "env": [
+              {
+                "name": "ZEUS_TOKEN",
+                "value": "8dcccc00"
+              }
+            ],
+            "ports": [
+              {
+                "containerPort": 8080,
+                "protocol": "TCP"
+              }
+            ],
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst"
+      }
+    }
+  }
+}
